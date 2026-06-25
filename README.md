@@ -1,4 +1,4 @@
-# ZenBlog — Server (API)
+# ZenBlog — Server 
 
 ZenBlog blog uygulamasının .NET 9 tabanlı backend servisidir. Onion (Clean) Architecture ve CQRS prensipleriyle, katmanlı ve test edilebilir bir yapıda geliştirilmiştir.
 
