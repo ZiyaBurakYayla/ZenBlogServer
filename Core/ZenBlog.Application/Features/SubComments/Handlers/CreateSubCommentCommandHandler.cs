@@ -1,0 +1,21 @@
+using AutoMapper;
+using MediatR;
+using ZenBlog.Application.Base;
+using ZenBlog.Application.Contracts.Persistence;
+using ZenBlog.Application.Features.SubComments.Commands;
+using ZenBlog.Domain.Entities;
+
+namespace ZenBlog.Application.Features.SubComments.Handlers
+{
+    public class CreateSubCommentCommandHandler(IRepository<SubComment> _repository, IUnitOfWork _unitOfWork, IMapper _mapper) :
+        IRequestHandler<CreateSubCommentCommand, BaseResult<object>>
+    {
+        public async Task<BaseResult<object>> Handle(CreateSubCommentCommand request, CancellationToken cancellationToken)
+        {
+            var subComment = _mapper.Map<SubComment>(request);
+            await _repository.CreateAsync(subComment);
+            var result = await _unitOfWork.SaveChangesAsync();
+            return BaseResult<object>.Success(subComment);
+        }
+    }
+}
